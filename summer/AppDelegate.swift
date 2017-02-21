@@ -24,6 +24,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate,WXApiDelegate,SDWebImageMa
         // Override point for customization after application launch.
         application.applicationIconBadgeNumber = 0
         JPUSHService.resetBadge()
+        //保存uuid
+        if isFirst() == true {
+            PDKeyChain.keyChainSave(NSUUID().uuidString)
+        }else{
+            
+        }
         //配置信息
         getImageData()
         //沉睡
@@ -156,7 +162,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate,WXApiDelegate,SDWebImageMa
         return UserDefaultsUtils.boolValueWithKey(key: "firstLaunch")
     }
     
-
+    func isFirst() ->Bool {
+        if (PDKeyChain.keyChainLoad() == nil) {
+            return true
+        }else{
+            return false
+        }
+    }
+    
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
