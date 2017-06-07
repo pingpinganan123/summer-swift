@@ -154,6 +154,8 @@ extension MainViewController{
         webView.allowsBackForwardNavigationGestures = true
         webView?.navigationDelegate = self
         webView?.uiDelegate = self
+        webView.scrollView.showsHorizontalScrollIndicator = false
+        webView.scrollView.showsVerticalScrollIndicator = false
         
         //监听支持KVO的属性
         webView?.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: nil)
