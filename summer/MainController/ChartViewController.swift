@@ -11,6 +11,7 @@ import UIKit
 class ChartViewController: BaseViewController {
     
     var dataStr:String?
+    var helpUrlStr:String?
     
     var xArray:Array<Any>?
     var yArray:Array<Any>?
@@ -202,6 +203,7 @@ extension ChartViewController:CustemBBI {
             _ = self.navigationController?.popViewController(animated: true)
         }else if infoStr == "second" {
             let helpVC = HelpViewController()
+            helpVC.urlStr = helpUrlStr;
             self.navigationController?.pushViewController(helpVC, animated: true)
         }
     }
