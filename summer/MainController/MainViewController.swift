@@ -11,6 +11,8 @@ import WebKit
 
 class MainViewController: UIViewController {
     
+    var urlPath:String?
+    
     fileprivate var webView: WKWebView!
     fileprivate var progressView: UIProgressView!//进度条
     
@@ -30,7 +32,7 @@ class MainViewController: UIViewController {
         //添加ProgressView
         addProgressView()
         //加载网页
-        loadUrl(urlStr: URLPATH)
+        loadUrl(urlStr: urlPath!)
         
         self.scale = 1.0
         
@@ -255,6 +257,15 @@ extension MainViewController: WKScriptMessageHandler {
             let navVC = UINavigationController.init(rootViewController: sqVC)
             self.present(navVC, animated: true, completion: nil)
 //            message.body as! Dictionary<String,String>)["appid"]
+        }else if type == "loginTimeOut" {
+            let alertController = UIAlertController.init(title: NSLocalizedString("下线通知", comment: ""), message: "您的账号在另一台设备上登录。如非本人操作，请重新登录并修改密码!", preferredStyle: .alert)
+            let alertAction2 = UIAlertAction.init(title: "确定", style: .default) { (action:UIAlertAction) in
+                let mainVC = MainViewController()
+                mainVC.urlPath = URL_APP_ROOT + "/forms/FrmBusinessLogin.exit" + "?device=iphone&CLIENTID=" + DisplayUtils.uuid()
+                UIApplication.shared.keyWindow?.rootViewController = mainVC
+            }
+            alertController.addAction(alertAction2)
+            self.present(alertController, animated: true, completion: nil)
         }else{//微信支付
             WXApi.registerApp((message.body as! Dictionary<String,String>)["appid"])
             let request = PayReq()

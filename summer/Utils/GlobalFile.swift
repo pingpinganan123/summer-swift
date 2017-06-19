@@ -39,10 +39,10 @@ func current_y_h(object:UIView) -> CGFloat {
 let isBackStr = "/forms/FrmIndex,/forms/Login,/forms/VerificationLogin"
 let isRefrushStr = "/forms/Default,/,/forms/Login?device=iphone,/forms/FrmPhoneRegistered,/forms/VerificationLogin,/forms/Login,/forms/FrmLossPassword"
 
-var URLPATH = URL_APP_ROOT+"/forms/FrmBusinessLogin" //url
+var URLPATH = URL_APP_ROOT+"/forms/FrmBusinessLogin"+"?device=iphone&CLIENTID="+DisplayUtils.uuid()//url
 
 var URLPATH_CONFIG = URL_APP_ROOT+"/forms/FrmHomePage"
-//?device=iphone&CLIENTID="+DisplayUtils.uuid()//配置信息的url
+//"?device=iphone&CLIENTID="+DisplayUtils.uuid()//配置信息的url
 
 var EXIT_URL_PATH = URL_APP_ROOT+"/form/TFrmLogout"
 

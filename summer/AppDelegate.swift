@@ -34,6 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,WXApiDelegate,SDWebImageMa
         self.window = UIWindow(frame:UIScreen.main.bounds)
         self.window?.backgroundColor = UIColor.white
         self.mainVC = MainViewController()
+        self.mainVC?.urlPath = URLPATH
 //        self.mainNav = BaseNavViewController(rootViewController:mainVC!)
         self.window?.rootViewController = mainVC
         self.window?.makeKeyAndVisible()
