@@ -74,10 +74,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate,WXApiDelegate,SDWebImageMa
  */
         var array = Array<UIImage>()
         for i in 0..<WELCOME_IMAGES_COUNT {
-            let image = UIImage.init(named: String(format:"welcome%d",i+1))
+            let image = UIImage.init(named: String(format:"商家端 启动页0%d",i+1))
             array.append(image!)
         }
-        LaunchIntroductionView.shared(withImages: array, buttonImage: "login", buttonFrame: CGRect.init(x: SCREEN_WIDTH-SCREEN_WIDTH/4, y: 20, width: SCREEN_WIDTH/4-10, height: 20), withisBanner: false)
+        LaunchIntroductionView.shared(withImages: array, buttonImage: "login", buttonFrame: CGRect.init(x: SCREEN_WIDTH-SCREEN_WIDTH/4, y: 20, width: SCREEN_WIDTH/4-10, height: 20))
         
         UserDefaultsUtils.saveValue(value: "1.00" as AnyObject, key: "scale")
         

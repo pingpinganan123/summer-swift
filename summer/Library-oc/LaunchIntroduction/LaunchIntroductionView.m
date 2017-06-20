@@ -7,7 +7,6 @@
 //
 
 #import "LaunchIntroductionView.h"
-#import "UIImageView+WebCache.h"
 
 static NSString *const kAppVersion = @"appVersion";
 
@@ -24,7 +23,6 @@ NSArray *images;
 BOOL isScrollOut;//在最后一页再次滑动是否隐藏引导页
 CGRect enterBtnFrame;
 NSString *enterBtnImage;
-BOOL isbanner;//判断是否是广告页
 static LaunchIntroductionView *launch = nil;
 #pragma mark - 创建对象-->>不带button
 +(instancetype)sharedWithImages:(NSArray *)imageNames{
@@ -36,12 +34,11 @@ static LaunchIntroductionView *launch = nil;
 }
 
 #pragma mark - 创建对象-->>带button
-+(instancetype)sharedWithImages:(NSArray *)imageNames buttonImage:(NSString *)buttonImageName buttonFrame:(CGRect)frame withisBanner:(BOOL)isBanner{
++(instancetype)sharedWithImages:(NSArray *)imageNames buttonImage:(NSString *)buttonImageName buttonFrame:(CGRect)frame{
     images = imageNames;
     isScrollOut = YES;
     enterBtnFrame = frame;
     enterBtnImage = buttonImageName;
-    isbanner = isBanner;
     launch = [[LaunchIntroductionView alloc] initWithFrame:CGRectMake(0, 0, kScreen_width, kScreen_height)];
     launch.backgroundColor = [UIColor whiteColor];
     return launch;
@@ -53,29 +50,14 @@ static LaunchIntroductionView *launch = nil;
     if (self) {
         [self addObserver:self forKeyPath:@"currentColor" options:NSKeyValueObservingOptionNew context:nil];
         [self addObserver:self forKeyPath:@"nomalColor" options:NSKeyValueObservingOptionNew context:nil];
-        [UIApplication sharedApplication].statusBarHidden = YES;
-        UIWindow *window = [[UIApplication sharedApplication] windows].lastObject;
-        [window addSubview:self];
-        [self addImages];
-#if 0
+
         if ([self isFirstLauch]) {
-            if (isbanner == NO) {
-                UIWindow *window = [[UIApplication sharedApplication] windows].lastObject;
-                [window addSubview:self];
-                [self addImages];
-            }else if(isbanner == YES){
-                [self removeFromSuperview];
-            }
+            UIWindow *window = [[UIApplication sharedApplication] windows].lastObject;
+            [window addSubview:self];
+            [self addImages];
         }else{
-            if (isbanner == NO) {
-                [self removeFromSuperview];
-            }else if(isbanner == YES){
-                UIWindow *window = [[UIApplication sharedApplication] windows].lastObject;
-                [window addSubview:self];
-                [self addImages];
-            }
+            [self removeFromSuperview];
         }
-#endif
     }
     return self;
 }
@@ -119,54 +101,38 @@ static LaunchIntroductionView *launch = nil;
                 [enterButton setImage:[UIImage imageNamed:enterBtnImage] forState:UIControlStateNormal];
                 [enterButton addTarget:self action:@selector(enterBtnClick) forControlEvents:UIControlEventTouchUpInside];
                 [enterButton setTitle:@"进入系统" forState:UIControlStateNormal];
-                [enterButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+                [enterButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
                 enterButton.titleLabel.font = [UIFont systemFontOfSize:12];
                 enterButton.layer.borderWidth = 1.0f;
-                enterButton.layer.borderColor = [UIColor blackColor].CGColor;
+                enterButton.layer.borderColor = [UIColor whiteColor].CGColor;
                 enterButton.layer.cornerRadius = 10.0f;
                 enterButton.layer.masksToBounds = YES;
                 
                 [imageView addSubview:enterButton];
                 imageView.userInteractionEnabled = YES;
             }
+
         }
     }
-    
     page = [[UIPageControl alloc] initWithFrame:CGRectMake(0, kScreen_height - 50, kScreen_width, 30)];
     page.numberOfPages = images.count;
     page.backgroundColor = [UIColor clearColor];
     page.currentPage = 0;
     page.defersCurrentPageDisplay = YES;
-    //[self addSubview:page];
-    
-    if (isbanner == YES) {
-        //添加定时器
-        double delayInSeconds = 2.0f;
-        __weak typeof(self) weakSelf = self;
-        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-            [weakSelf delayMethod];
-        });
-    }
-    
+    [self addSubview:page];
 }
--(void)delayMethod
-{
-    //[self hideGuidView];
-}
-
 #pragma mark - 进入按钮
 -(void)enterBtnClick{
     [self hideGuidView];
 }
 #pragma mark - 隐藏引导页
 -(void)hideGuidView{
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"ShowBanner" object:nil userInfo:nil];
     [UIView animateWithDuration:0.5 animations:^{
         self.alpha = 0;
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [self removeFromSuperview];
         });
+        
     }];
 }
 #pragma mark - scrollView Delegate
@@ -204,12 +170,6 @@ static LaunchIntroductionView *launch = nil;
     if ([keyPath isEqualToString:@"nomalColor"]) {
         page.pageIndicatorTintColor = self.nomalColor;
     }
-}
-
--(void)dealloc
-{
-    [self removeObserver:self forKeyPath:@"currentColor"];
-    [self removeObserver:self forKeyPath:@"nomalColor"];
 }
 
 @end

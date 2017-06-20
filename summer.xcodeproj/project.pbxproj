@@ -50,7 +50,7 @@
 		6407BFAE1E542DDF0073C297 /* UIRefreshControl+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 6407BF9A1E542DDF0073C297 /* UIRefreshControl+AFNetworking.m */; };
 		6407BFAF1E542DDF0073C297 /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 6407BF9C1E542DDF0073C297 /* UIWebView+AFNetworking.m */; };
 		6407BFB21E5435700073C297 /* AFNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6407BFB11E5435700073C297 /* AFNetworkManager.m */; };
-		6407BFB61E5447D40073C297 /* LaunchIntroductionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6407BFB51E5447D40073C297 /* LaunchIntroductionView.m */; };
+		64254A8E1EF8F5F500D974A5 /* LaunchIntroductionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 64254A8D1EF8F5F500D974A5 /* LaunchIntroductionView.m */; };
 		64AE940B1E9B620E00E08B78 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64AE940A1E9B620E00E08B78 /* QuartzCore.framework */; };
 		64AE940D1E9B627A00E08B78 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64AE940C1E9B627A00E08B78 /* CoreText.framework */; };
 		64AE940F1E9B62C100E08B78 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64AE940E1E9B62C100E08B78 /* CoreMotion.framework */; };
@@ -228,8 +228,8 @@
 		6407BF9C1E542DDF0073C297 /* UIWebView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+AFNetworking.m"; sourceTree = "<group>"; };
 		6407BFB01E5435700073C297 /* AFNetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworkManager.h; sourceTree = "<group>"; };
 		6407BFB11E5435700073C297 /* AFNetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFNetworkManager.m; sourceTree = "<group>"; };
-		6407BFB41E5447D40073C297 /* LaunchIntroductionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LaunchIntroductionView.h; sourceTree = "<group>"; };
-		6407BFB51E5447D40073C297 /* LaunchIntroductionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LaunchIntroductionView.m; sourceTree = "<group>"; };
+		64254A8C1EF8F5F500D974A5 /* LaunchIntroductionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LaunchIntroductionView.h; sourceTree = "<group>"; };
+		64254A8D1EF8F5F500D974A5 /* LaunchIntroductionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LaunchIntroductionView.m; sourceTree = "<group>"; };
 		64AE940A1E9B620E00E08B78 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		64AE940C1E9B627A00E08B78 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		64AE940E1E9B62C100E08B78 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
@@ -888,8 +888,8 @@
 		6407BFB31E5447D40073C297 /* LaunchIntroduction */ = {
 			isa = PBXGroup;
 			children = (
-				6407BFB41E5447D40073C297 /* LaunchIntroductionView.h */,
-				6407BFB51E5447D40073C297 /* LaunchIntroductionView.m */,
+				64254A8C1EF8F5F500D974A5 /* LaunchIntroductionView.h */,
+				64254A8D1EF8F5F500D974A5 /* LaunchIntroductionView.m */,
 			);
 			path = LaunchIntroduction;
 			sourceTree = "<group>";
@@ -1760,11 +1760,11 @@
 				64F413671E55528400FDAAC6 /* MJRefreshBackNormalFooter.m in Sources */,
 				6407BF691E542DD00073C297 /* SDWebImageDownloader.m in Sources */,
 				6407BF671E542DD00073C297 /* SDWebImageCompat.m in Sources */,
+				64254A8E1EF8F5F500D974A5 /* LaunchIntroductionView.m in Sources */,
 				64F4136F1E55528400FDAAC6 /* UIScrollView+MJExtension.m in Sources */,
 				6407BFAE1E542DDF0073C297 /* UIRefreshControl+AFNetworking.m in Sources */,
 				64F413711E55528400FDAAC6 /* UIView+MJExtension.m in Sources */,
 				64F4135F1E55528400FDAAC6 /* MJRefreshBackFooter.m in Sources */,
-				6407BFB61E5447D40073C297 /* LaunchIntroductionView.m in Sources */,
 				6407BF711E542DD00073C297 /* UIImageView+WebCache.m in Sources */,
 				6407BFAC1E542DDF0073C297 /* UIImageView+AFNetworking.m in Sources */,
 				64F413731E555A5000FDAAC6 /* PingImageViewController.swift in Sources */,

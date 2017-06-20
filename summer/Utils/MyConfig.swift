@@ -10,7 +10,7 @@ import UIKit
 
 let URL_APP_ROOT = "http://192.168.1.190:8080"//域名地址//内测版
 
-let WELCOME_IMAGES_COUNT = 3
+let WELCOME_IMAGES_COUNT = 4
 
 //推送
 let appkey = "cc92570c841a688af5adc5b0"
