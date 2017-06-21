@@ -11,6 +11,8 @@ import WebKit
 
 class MainViewController: BaseViewController {
     
+    var urlStr:String?
+    
     fileprivate var webView: WKWebView!
     fileprivate var progressView: UIProgressView!//进度条
     
@@ -21,6 +23,8 @@ class MainViewController: BaseViewController {
     var rightText:String!//导航栏右边的按钮
     var methodName:String!//方法名
     var chartDataStr:String!//图表数据
+    var helpDataStr:String!//帮助页面的URL
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +37,7 @@ class MainViewController: BaseViewController {
         //添加ProgressView
         addProgressView()
         //加载网页
-        loadUrl(urlStr: URLPATH)
+        loadUrl(urlStr: urlStr!)
         
         self.scale = 1.0
         
@@ -89,10 +93,7 @@ class MainViewController: BaseViewController {
     
     func WXLoginAction(notifi:Notification) {
         let code:String? = notifi.userInfo?["code"] as! String?
-        print(code)
         AFNetworkManager.get(String(format:"https://api.weixin.qq.com/sns/oauth2/access_token?appid=%@&secret=%@&code=%@&grant_type=authorization_code",WX_APPID,WX_APPSecret,code!), parameters: nil, success: { (operation:AFHTTPRequestOperation?, responseObject:[AnyHashable : Any]?) in
-            print(responseObject)
-            print(responseObject?["openid"] as! String)
             print("wxClientLogin(\(responseObject?["openid"] as! String))")
             self.webView.evaluateJavaScript("wxClientLogin('\(responseObject?["openid"] as! String)')", completionHandler: { (item:Any?, error:Error?) in
                 
@@ -161,7 +162,6 @@ extension MainViewController{
     //加载url
     fileprivate func loadUrl(urlStr:String) {
         let urlStr = URL.init(string: urlStr)
-        print(URLPATH)
         let request = URLRequest.init(url: urlStr!)
         webView.load(request)
     }
@@ -295,13 +295,10 @@ extension MainViewController: WKScriptMessageHandler {
             rightText = Text
             methodName = method
             let  chartData = (message.body as! Dictionary<String,String>)["list1"]
-            print((message.body as! Dictionary<String,String>)["list1"])
+//            print((message.body as! Dictionary<String,String>)["list1"])
             chartDataStr = chartData
-            if rightText == "帮助" {
-                let chartVC = ChartViewController()
-                chartVC.dataStr = chartDataStr
-                self.navigationController?.pushViewController(chartVC, animated: true)
-            }
+            let  helpData = (message.body as! Dictionary<String,String>)["help"]
+            helpDataStr = helpData;
         }else{//微信支付
             let request = PayReq()
             request.openID = (message.body as! Dictionary<String,String>)["appid"]
@@ -459,6 +456,12 @@ extension MainViewController:CustemBBI,SettingDelegate{
             self.webView.evaluateJavaScript(methodName!, completionHandler: { (item:Any?, error:Error?) in
                 
             })
+            if rightText == "图表" {
+                let chartVC = ChartViewController()
+                chartVC.dataStr = chartDataStr
+                chartVC.helpUrlStr = helpDataStr;
+                self.navigationController?.pushViewController(chartVC, animated: true)
+            }
         }else{
             let dataDict = [(icon:"iconfont-978weiduxinxi",title:"未读消息"),
                             (icon:"iconfont-shezhi-3",title:"设置"),
