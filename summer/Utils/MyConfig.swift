@@ -18,6 +18,6 @@ let channel = "Publish channel"
 let isProduction = true
 
 //微信
-let WX_APPID = "wxc429effa4562439c"
-let WX_APPSecret = "6a59e0fe5f00e3dad6629af26b0fca32"
+let WX_APPID = "wx880d8fc48ac1e88e"
+let WX_APPSecret = "01637635ce8648402cf4268d690b1226"
 
