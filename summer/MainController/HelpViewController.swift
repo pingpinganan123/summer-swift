@@ -11,7 +11,7 @@ import WebKit
 
 class HelpViewController: BaseViewController {
 
-    var urlStr:String?
+    var urlpath:String?
     fileprivate var webView: WKWebView!
     fileprivate var progressView: UIProgressView!//进度条
     
@@ -25,7 +25,7 @@ class HelpViewController: BaseViewController {
         //添加WkWebView
         addWebView()
         //加载网页
-        loadUrl(urlStr: URL_APP_ROOT+"/forms/"+urlStr!+"&device=iphone&CLIENTID="+DisplayUtils.uuid())
+        loadUrl(urlStr: URL_APP_ROOT+"/forms/"+urlpath!)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -43,8 +43,8 @@ extension HelpViewController{
     
     //加载url
     fileprivate func loadUrl(urlStr:String) {
-        let urlStr = URL.init(string: urlStr)
-        let request = URLRequest.init(url: urlStr!)
+        let url = URL.init(string: urlStr)
+        let request = URLRequest.init(url: url!)
         webView.load(request)
     }
     

@@ -203,7 +203,7 @@ extension ChartViewController:CustemBBI {
             _ = self.navigationController?.popViewController(animated: true)
         }else if infoStr == "second" {
             let helpVC = HelpViewController()
-            helpVC.urlStr = helpUrlStr;
+            helpVC.urlpath = helpUrlStr;
             self.navigationController?.pushViewController(helpVC, animated: true)
         }
     }
