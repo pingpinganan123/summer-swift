@@ -97,7 +97,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,WXApiDelegate,SDWebImageMa
         return true
     }
     
-    func statusBarHiddenNotfi() {
+    @objc func statusBarHiddenNotfi() {
         UIApplication.shared.statusBarStyle = .lightContent
         UIApplication.shared.isStatusBarHidden = false
     }

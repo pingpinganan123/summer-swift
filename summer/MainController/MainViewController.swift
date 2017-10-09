@@ -62,7 +62,7 @@ class MainViewController: BaseViewController {
     }
     
     //支付成功返回
-    func paySucceed(notifi:Notification) {
+    @objc func paySucceed(notifi:Notification) {
         let result = notifi.userInfo?["code"]
         self.webView.evaluateJavaScript("ReturnForApp('\(result!)')") {
             (item:Any?, error:Error?) in
@@ -70,7 +70,7 @@ class MainViewController: BaseViewController {
     }
     
     //网络监测
-    func getLoadDataBase(notifi:Notification) {
+    @objc func getLoadDataBase(notifi:Notification) {
         let netWork:String? = notifi.userInfo?["netType"] as! String?
         if netWork! == "NotReachable" || netWork! == "Unknown" {
             DisplayUtils.alertControllerDisplay(str: "网络出现异常，请检查网络连接！", viewController: self, confirmBlock: {
@@ -84,7 +84,7 @@ class MainViewController: BaseViewController {
     }
     
     //推送
-    func jpushMessage(notifi:Notification) {
+    @objc func jpushMessage(notifi:Notification) {
         let msgId:String? = notifi.userInfo?["msgId"] as! String?
         self.loadUrl(urlStr: String(format:"%@/form/FrmMessages.show?msgId=%@",URL_APP_ROOT,msgId!))
     }
@@ -108,7 +108,7 @@ class MainViewController: BaseViewController {
         }
     }
     
-    func headerRefresh() {
+    @objc func headerRefresh() {
         self.webView.reload()
     }
     
